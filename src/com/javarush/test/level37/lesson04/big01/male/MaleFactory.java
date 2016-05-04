@@ -1,8 +1,7 @@
-package com.javarush.test.level37.lesson04.big01;
+package com.javarush.test.level37.lesson04.big01.male;
 
-import com.javarush.test.level37.lesson04.big01.male.KidBoy;
-import com.javarush.test.level37.lesson04.big01.male.Man;
-import com.javarush.test.level37.lesson04.big01.male.TeenBoy;
+import com.javarush.test.level37.lesson04.big01.Human;
+
 
 /**
  * Created by Администратор on 04.05.2016.

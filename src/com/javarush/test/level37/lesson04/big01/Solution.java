@@ -1,5 +1,7 @@
 package com.javarush.test.level37.lesson04.big01;
 
+import com.javarush.test.level37.lesson04.big01.male.MaleFactory;
+
 /**
  * Created by Администратор on 04.05.2016.
  */
