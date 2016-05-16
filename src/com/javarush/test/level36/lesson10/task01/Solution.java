@@ -1,5 +1,7 @@
 package com.javarush.test.level36.lesson10.task01;
 
+import java.util.concurrent.DelayQueue;
+
 /* Найти класс по описанию
 1. Реализует интерфейс Queue
 2. Используется при работе с трэдами
@@ -12,21 +14,6 @@ public class Solution {
     }
 
     public static Class getExpectedClass() {
-        ClassLoader loader = new ClassLoader()
-        {
-            @Override
-            protected Package[] getPackages()
-            {
-                return super.getPackages();
-            }
-
-        };
-
-
-
-
-
-
-        return null;
+        return DelayQueue.class;
     }
 }
