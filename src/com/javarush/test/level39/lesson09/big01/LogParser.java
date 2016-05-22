@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQuery
 {
@@ -85,26 +87,85 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         return setMessageOfCurrentDate;
     }
 
-    private Set<String> getStringParameters(Date after, Date before, String typeFilter, String value)
+    private Set<String> getStringParameters(Date after, Date before, String value, String typeValue)
     {
         Set<String> set = new HashSet<>();
         for (String s : createSetMessageToCurrentDate(after, before))
         {
-            switch (value)
+            switch (typeValue)
             {
                 case ("ip"):
-                    if (typeFilter == null || s.contains(typeFilter))
+                    if (value == null || s.contains(value))
                         set.add(getIP(s));
                     break;
                 case ("user"):
-                    if (typeFilter == null || s.contains(typeFilter))
+                    if (value == null || s.contains(value))
                         set.add(getName(s));
                     break;
                 case ("event"):
-                    if (typeFilter == null || s.contains(typeFilter))
+                    if (value == null || s.contains(value))
                         set.add(getEvent(s).split(" ")[0]);
                     break;
             }
+        }
+        return set;
+    }
+
+    private Set<Date> getDateParameters(Date after, Date before, String typeFilter, String value)
+    {
+        Set<Date> set = new HashSet<>();
+        for (String s : createSetMessageToCurrentDate(after, before))
+        {
+            if ((value == null || s.contains(value)) && (typeFilter == null) || s.contains(typeFilter))
+                try
+                {
+                    set.add(format.parse(getDate(s)));
+                }
+                catch (Exception e)
+                {
+                }
+        }
+        return set;
+    }
+
+    private Date getDateFirstTime(Date after, Date before, String user, String filter)
+    {
+        Date date = null;
+        for (String s : createSetMessageToCurrentDate(after, before))
+        {
+            String eventUser = getEvent(s);
+            String userName = getName(s);
+            if (userName.equals(user) && eventUser.equals(filter))
+                try
+                {
+                    date = format.parse(getDate(s));
+                    break;
+                }
+                catch (Exception e)
+                {
+                }
+        }
+        return date;
+    }
+
+    private Set<Event> getEventParameter(Date after, Date before, String typeFilter, String value)
+    {
+        Set<Event> set = new HashSet<>();
+        for (String s : createSetMessageToCurrentDate(after, before))
+        {
+            if ((typeFilter == null || s.contains(typeFilter)) && (value == null || s.contains(value)))
+                set.add(Event.valueOf(getEvent(s).split(" ")[0]));
+        }
+        return set;
+    }
+
+    private Set<Status> getStatusParameter(Date after, Date before, String typeFilter, String value)
+    {
+        Set<Status> set = new HashSet<>();
+        for (String s : createSetMessageToCurrentDate(after, before))
+        {
+            if ((typeFilter == null || s.contains(typeFilter)) && (value == null || s.contains(value)))
+                set.add(Status.valueOf(getStatus(s)));
         }
         return set;
     }
@@ -202,184 +263,55 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     @Override
     public Set<String> getDoneTaskUsers(Date after, Date before, int task)
     {
-        Set<String> doneTaskUsers = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String event = getEvent(s).split(" ")[0];
-
-            String userName = getName(s);
-            if (event.equals(Event.DONE_TASK.name()))
-            {
-                int numTask = Integer.parseInt(getEvent(s).split(" ")[1]);
-                if (numTask == task)
-                    doneTaskUsers.add(userName);
-            }
-        }
         return getStringParameters(after, before, Event.DONE_TASK.name() + " " + task, "user");
     }
 
     @Override
     public Set<Date> getDatesForUserAndEvent(String user, Event event, Date after, Date before)
     {
-        Set<Date> datesForUserAndEvent = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String nameUser = getName(s);
-            String eventUser = getEvent(s).split(" ")[0];
-            if (nameUser.equals(user) && eventUser.equals(event.name()))
-                try
-                {
-                    datesForUserAndEvent.add(format.parse(getDate(s)));
-                }
-                catch (Exception e)
-                {
-                }
-
-        }
-        return datesForUserAndEvent;
+        return getDateParameters(after, before, user, event.name());
     }
 
     @Override
     public Set<Date> getDatesWhenSomethingFailed(Date after, Date before)
     {
-        Set<Date> datesWhenSomethingFailed = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String statusUser = getStatus(s);
-            if (statusUser.equals(Status.FAILED.name()))
-                try
-                {
-                    datesWhenSomethingFailed.add(format.parse(getDate(s)));
-                }
-                catch (Exception e)
-                {
-                }
-        }
-        return datesWhenSomethingFailed;
+        return getDateParameters(after, before, Status.FAILED.name(), null);
     }
 
     @Override
     public Set<Date> getDatesWhenErrorHappened(Date after, Date before)
     {
-        Set<Date> datesWhenErrorHappened = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String statusUser = getStatus(s);
-            if (statusUser.equals(Status.ERROR.name()))
-                try
-                {
-                    datesWhenErrorHappened.add(format.parse(getDate(s)));
-                }
-                catch (Exception e)
-                {
-                }
-        }
-        return datesWhenErrorHappened;
+        return getDateParameters(after, before, Status.ERROR.name(), null);
     }
 
     @Override
     public Date getDateWhenUserLoggedFirstTime(String user, Date after, Date before)
     {
-        Date date = null;
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String eventUser = getEvent(s);
-            String userName = getName(s);
-            if (userName.equals(user) && eventUser.equals(Event.LOGIN.name()))
-                try
-                {
-                    date = format.parse(getDate(s));
-                    break;
-                }
-                catch (Exception e)
-                {
-                }
-        }
-        return date;
+        return getDateFirstTime(after, before, user, Event.LOGIN.name());
     }
 
     @Override
     public Date getDateWhenUserSolvedTask(String user, int task, Date after, Date before)
     {
-        Date date = null;
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String eventUser = getEvent(s).split(" ")[0];
-            String userName = getName(s);
-            if (userName.equals(user) && eventUser.equals(Event.SOLVE_TASK.name()))
-                if (Integer.parseInt(getEvent(s).split(" ")[1]) == task)
-                    try
-                    {
-                        date = format.parse(getDate(s));
-                        break;
-                    }
-                    catch (Exception e)
-                    {
-                    }
-        }
-        return date;
+        return getDateFirstTime(after, before, user, Event.SOLVE_TASK.name() + " " + task);
     }
 
     @Override
     public Date getDateWhenUserDoneTask(String user, int task, Date after, Date before)
     {
-        Date date = null;
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String eventUser = getEvent(s).split(" ")[0];
-            String userName = getName(s);
-            if (userName.equals(user) && eventUser.equals(Event.DONE_TASK.name()))
-                if (Integer.parseInt(getEvent(s).split(" ")[1]) == task)
-                    try
-                    {
-                        date = format.parse(getDate(s));
-                        break;
-                    }
-                    catch (Exception e)
-                    {
-                    }
-        }
-        return date;
+        return getDateFirstTime(after, before, user, Event.DONE_TASK.name() + " " + task);
     }
 
     @Override
     public Set<Date> getDatesWhenUserWroteMessage(String user, Date after, Date before)
     {
-        Set<Date> datesWhenUserWroteMessage = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String userName = getName(s);
-            String userEvent = getEvent(s);
-            if (userName.equals(user) && userEvent.equals(Event.WRITE_MESSAGE.name()))
-                try
-                {
-                    datesWhenUserWroteMessage.add(format.parse(getDate(s)));
-                }
-                catch (Exception e)
-                {
-                }
-        }
-        return datesWhenUserWroteMessage;
+        return getDateParameters(after, before, Event.WRITE_MESSAGE.name(), user);
     }
 
     @Override
     public Set<Date> getDatesWhenUserDownloadedPlugin(String user, Date after, Date before)
     {
-        Set<Date> datesWhenUserDownloadedPlugin = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String userName = getName(s);
-            String userEvent = getEvent(s);
-            if (userName.equals(user) && userEvent.equals(Event.DOWNLOAD_PLUGIN.name()))
-                try
-                {
-                    datesWhenUserDownloadedPlugin.add(format.parse(getDate(s)));
-                }
-                catch (Exception e)
-                {
-                }
-        }
-        return datesWhenUserDownloadedPlugin;
+        return getDateParameters(after, before, Event.DOWNLOAD_PLUGIN.name(), user);
     }
 
     @Override
@@ -391,69 +323,31 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     @Override
     public Set<Event> getAllEvents(Date after, Date before)
     {
-        Set<Event> allEvent = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            Event event = Event.valueOf(getEvent(s).split(" ")[0]);
-            allEvent.add(event);
-        }
-        return allEvent;
+        return getEventParameter(after, before, null, null);
     }
 
     @Override
     public Set<Event> getEventsForIP(String ip, Date after, Date before)
     {
-        Set<Event> eventsForIP = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String ipUser = getIP(s);
-            Event event = Event.valueOf(getEvent(s).split(" ")[0]);
-            if (ipUser.equals(ip))
-                eventsForIP.add(event);
-        }
-        return eventsForIP;
+        return getEventParameter(after, before, ip, null);
     }
 
     @Override
     public Set<Event> getEventsForUser(String user, Date after, Date before)
     {
-        Set<Event> eventsForUser = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String userName = getName(s);
-            Event event = Event.valueOf(getEvent(s).split(" ")[0]);
-            if (userName.equals(user))
-                eventsForUser.add(event);
-        }
-        return eventsForUser;
+        return getEventParameter(after, before, user, null);
     }
 
     @Override
     public Set<Event> getFailedEvents(Date after, Date before)
     {
-        Set<Event> eventsFailedEvents = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String userStatus = getStatus(s);
-            Event event = Event.valueOf(getEvent(s).split(" ")[0]);
-            if (userStatus.equals(Status.FAILED.name()))
-                eventsFailedEvents.add(event);
-        }
-        return eventsFailedEvents;
+        return getEventParameter(after, before, Status.FAILED.name(), null);
     }
 
     @Override
     public Set<Event> getErrorEvents(Date after, Date before)
     {
-        Set<Event> eventsErrorEvents = new HashSet<>();
-        for (String s : createSetMessageToCurrentDate(after, before))
-        {
-            String userStatus = getStatus(s);
-            Event event = Event.valueOf(getEvent(s).split(" ")[0]);
-            if (userStatus.equals(Status.ERROR.name()))
-                eventsErrorEvents.add(event);
-        }
-        return eventsErrorEvents;
+        return getEventParameter(after, before, Status.ERROR.name(), null);
     }
 
     @Override
@@ -462,13 +356,8 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         int count = 0;
         for (String s : createSetMessageToCurrentDate(after, before))
         {
-            String eventUser = getEvent(s).split(" ")[0];
-            if (eventUser.equals(Event.SOLVE_TASK.name()))
-            {
-                int taskUser = Integer.parseInt(getEvent(s).split(" ")[1]);
-                if (taskUser == task)
-                    count++;
-            }
+            if (s.contains(Event.SOLVE_TASK + " " + task))
+                count++;
         }
         return count;
     }
@@ -479,13 +368,8 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
         int count = 0;
         for (String s : createSetMessageToCurrentDate(after, before))
         {
-            String eventUser = getEvent(s).split(" ")[0];
-            if (eventUser.equals(Event.DONE_TASK.name()))
-            {
-                int taskUser = Integer.parseInt(getEvent(s).split(" ")[1]);
-                if (taskUser == task)
-                    count++;
-            }
+            if (s.contains(Event.DONE_TASK + " " + task))
+                count++;
         }
         return count;
     }
@@ -525,6 +409,48 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
     @Override
     public Set<Object> execute(String query)
     {
-        return null;
+        Set<Object> set = new HashSet<>();
+        String[] message = query.split(" ");
+
+                                                                        //get field1 for field2 = "value1"
+        Pattern p = Pattern.compile("get (ip|user|date|event|status)"
+                + "( for (ip|user|date|event|status) = \"(.*?)\")?"
+                + "( and date between \"(.*?)\" and \"(.*?)\")?");
+        Matcher m = p.matcher(query);
+        m.matches();
+        String field1 = m.group(1);
+        String field2 = m.group(3);
+        String value1 = m.group(4);
+        Date after;
+        Date before;
+        try
+        {
+            after = format.parse(m.group(6));
+            before = format.parse(m.group(7));
+        }catch (Exception e)
+        {
+            after = null;
+            before = null;
+        }
+        if ("get".equals(message[0]))
+            switch (field1)
+            {
+                case ("ip"):
+                    set.addAll(getStringParameters(after, before, value1, field1));
+                    break;
+                case ("user"):
+                    set.addAll(getStringParameters(after, before, value1, field1));
+                    break;
+                case ("date"):
+                    set.addAll(getDateParameters(after, before, value1, null));
+                    break;
+                case ("event"):
+                    set.addAll(getEventParameter(after, before, value1, null));
+                    break;
+                case ("status"):
+                    set.addAll(getStatusParameter(after, before, value1, null));
+                    break;
+            }
+        return set;
     }
 }
