@@ -451,6 +451,7 @@ public class LogParser implements IPQuery, UserQuery, DateQuery, EventQuery, QLQ
                     set.addAll(getStatusParameter(after, before, value1, null));
                     break;
             }
+
         return set;
     }
 }
