@@ -24,13 +24,9 @@ public class Solution {
 
     public static class GenerateThread extends Thread{
 
-
-
         public GenerateThread(){
         super(String.valueOf(++countCreatedThreads));
             start();
-
-
         }
 
         public void run(){
