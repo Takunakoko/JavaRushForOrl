@@ -8,30 +8,20 @@ import java.io.InputStreamReader;
 Новая задача: Программа вводит пять чисел с клавиатуры и выводит минимальное из них на экран.
 */
 
-public class Solution
-{
+public class Solution {
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int a = Integer.parseInt(reader.readLine());
         int b = Integer.parseInt(reader.readLine());
-        int c = Integer.parseInt(reader.readLine());
-        int d = Integer.parseInt(reader.readLine());
-        int e = Integer.parseInt(reader.readLine());
 
 
-        int min1 = min(a, b);
-        int min2 = min(d, c);
-        int min3 = min(min1, min2);
-        int minimum = min(min3, e);
-
-        System.out.println("Minimum = " + minimum);
+        int min = min(a, b);
+        System.out.println("Minimum = " + min);
     }
 
 
-    public static int min(int a, int b)
-    {
+    public static int min(int a, int b) {
         return a < b ? a : b;
     }
 

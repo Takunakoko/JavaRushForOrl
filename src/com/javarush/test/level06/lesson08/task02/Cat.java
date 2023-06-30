@@ -5,24 +5,12 @@ package com.javarush.test.level06.lesson08.task02;
 c помощью которых можно получить/изменить количество котов (переменную catCount)
 */
 
-public class Cat
-{
+public class Cat {
     private static int catCount = 0;
 
-    public Cat()
-    {
+    public Cat() {
         catCount++;
     }
 
-    public static int getCatCount()
-    {
-        //напишите тут ваш код
-        return catCount;
-    }
 
-    public static void setCatCount(int catCount)
-    {
-        //напишите тут ваш код
-        Cat.catCount = catCount;
-    }
 }

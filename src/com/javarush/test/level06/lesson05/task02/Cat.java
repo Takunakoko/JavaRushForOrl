@@ -4,20 +4,10 @@ package com.javarush.test.level06.lesson05.task02;
 В каждом классе Cat и Dog написать метод finalize, который выводит на экран текст о том, что такой-то объект уничтожен.
 */
 
-public class Cat
-{
+public class Cat {
     //напишите тут ваш код
-    protected void finalize() throws Throwable
-    {
-        System.out.print("Cat destroyed");
-    }
 }
 
-class Dog
-{
+class Dog {
     //напишите тут ваш код
-    protected void finalize() throws Throwable
-    {
-        System.out.print("Dog destroyed");
-    }
 }

@@ -11,16 +11,8 @@ import java.io.InputStreamReader;
 …
 */
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String name = r.readLine();
-        for (int i=1; i <= 10; i++){
-            System.out.println(name+" любит меня.");
-        }
-        //Напишите тут ваш код
-
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        // Напишите тут ваш код
     }
 }

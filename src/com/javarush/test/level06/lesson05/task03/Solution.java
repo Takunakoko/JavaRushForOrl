@@ -5,35 +5,24 @@ package com.javarush.test.level06.lesson05.task03;
  и метод finalize хоть раз да вызовется).
 */
 
-public class Solution
-{
-    public static void main(String[] args)
-    {
-        for (int j = 0; j < 50000; j++)
-        {
-                                                                    //напишите тут ваш код
-            Cat cat = new Cat();
-            Dog dog = new Dog();
-
-        }
+public class Solution {
+    public static void main(String[] args) {
+        //напишите тут ваш код
 
     }
 }
-class Cat
-{
+
+class Cat {
     @Override
-    protected void finalize() throws Throwable
-    {
+    protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("Cat destroyed");
     }
 }
 
-class Dog
-{
+class Dog {
     @Override
-    protected void finalize() throws Throwable
-    {
+    protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("Dog destroyed");
     }

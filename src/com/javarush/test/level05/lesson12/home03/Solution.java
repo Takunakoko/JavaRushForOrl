@@ -11,53 +11,11 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        Mouse jerryMouse = new Mouse("Jerry", 12 , 5);
-        Dog SpikeDog = new Dog("Spike", 75, 10);
-        Cat TommCat = new Cat("Tomm", 60, 10);
-
         //Напишите тут ваш код
     }
 
-    public static class Mouse
-    {
-        String name;
-        int height;
-        int tail;
-
-        public Mouse(String name, int height, int tail)
-        {
-            this.name = name;
-            this.height = height;
-            this.tail = tail;
-        }
-    }
     //Напишите тут ваши классы
-    public static class Dog
-    {
-        String name;
-        int height;
-        int tail;
 
-        public Dog(String name, int height, int tail)
-        {
-            this.name = name;
-            this.height = height;
-            this.tail = tail;
-        }
-    }
-    public static class Cat
-    {
-        String name;
-        int height;
-        int tail;
-
-        public Cat(String name, int height, int tail)
-        {
-            this.name = name;
-            this.height = height;
-            this.tail = tail;
-        }
-    }
 
 
 

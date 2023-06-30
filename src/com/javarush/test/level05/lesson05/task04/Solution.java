@@ -7,9 +7,7 @@ package com.javarush.test.level05.lesson05.task04;
 
 public class Solution {
     public static void main(String[] args) {
-        Cat cat1 = new Cat("Vasa", 11, 11, 11);
-        Cat cat2 = new Cat("Dima", 22, 22, 22);
-        Cat cat3 = new Cat("Vana", 33, 33, 33);
+
 
         //add your code here
     }

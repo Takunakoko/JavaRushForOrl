@@ -8,21 +8,8 @@ package com.javarush.test.level04.lesson16.home03;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Solution
-{
-    public static void main(String[] args)   throws Exception
-    {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        int sum = 0;
-        while (true){
-            int n = Integer.parseInt(r.readLine());
-            sum = sum+n;
-            if (n == (-1))
-            {
-                System.out.println(sum);
-                return;
-            }
-        }
-        //Напишите тут ваш код
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        // Напишите тут ваш код
     }
 }

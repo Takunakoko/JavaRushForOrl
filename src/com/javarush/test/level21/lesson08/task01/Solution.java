@@ -1,6 +1,5 @@
 package com.javarush.test.level21.lesson08.task01;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

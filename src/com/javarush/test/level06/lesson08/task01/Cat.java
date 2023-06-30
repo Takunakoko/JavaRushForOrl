@@ -6,13 +6,7 @@ package com.javarush.test.level06.lesson08.task01;
 в котором увеличивай данную переменную на 1.
 */
 
-public class Cat
-{
+public class Cat {
     //напишите тут ваш код
-    public static int catCount = 0;
-    public Cat()
-    {
-        catCount = catCount + 1;
-    }
 
 }

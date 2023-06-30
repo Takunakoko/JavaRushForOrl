@@ -6,16 +6,15 @@ package com.javarush.test.level06.lesson05.task04;
 В методе finalize уменьшать на 1.
 */
 
-public class Cat
-{
+public class Cat {
     public static int catCount = 0;
-    public Cat()
-    {
-        catCount = catCount + 1;
+
+    public Cat() {
+
     }
-    protected void finalize() throws Throwable
-    {
-        System.out.println(catCount = catCount - 1);
+
+    protected void finalize() throws Throwable {
+
     }
 
     //напишите тут ваш код

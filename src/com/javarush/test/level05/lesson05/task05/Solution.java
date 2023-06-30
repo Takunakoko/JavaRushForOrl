@@ -9,13 +9,6 @@ package com.javarush.test.level05.lesson05.task05;
 
 public class Solution {
     public static void main(String[] args) {
-        Cat cat1 = new Cat("Вася", 3, 5, 7);
-        Cat cat2 = new Cat("Макс", 4, 5, 6);
-        Cat cat3 = new Cat("Гоша", 7, 7, 9);
-
-        System.out.println(cat1.fight(cat2));
-        System.out.println(cat3.fight(cat2));
-        System.out.println(cat2.fight(cat3));
 
         //add your code here
     }

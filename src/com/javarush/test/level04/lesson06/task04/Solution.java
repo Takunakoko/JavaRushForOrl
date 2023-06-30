@@ -5,18 +5,9 @@ package com.javarush.test.level04.lesson06.task04;
 Если имена разные, но их длины равны – вывести сообщение – «Длины имен равны».
 */
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in)); //Напишите тут ваш код
-        String name1 = r.readLine();
-        String name2 = r.readLine();
-        if (name1.equals(name2)) System.out.println("Имена идентичны");
-        else
-            if (name1.length() == name2.length()) System.out.print("Длины имен равны");
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        // Напишите тут ваш код
     }
 }

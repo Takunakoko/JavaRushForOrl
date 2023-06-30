@@ -7,29 +7,8 @@ package com.javarush.test.level05.lesson09.task01;
 - Имя, возраст, пол
 */
 
-public class Friend
-{
-    String name = null;
-    int age = 0;
-    String sex = "m";
+public class Friend {
 
-    public Friend(String name)
-    {
-        this.name = name;
-    }
-
-    public Friend(String name, int age)
-    {
-        this.name = name;
-        this.age = age;
-    }
-
-    public Friend(String name, int age, String sex)
-    {
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-    }
     //Напишите тут ваш код
 
 }

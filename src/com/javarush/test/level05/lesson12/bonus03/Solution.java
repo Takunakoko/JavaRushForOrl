@@ -10,27 +10,9 @@ import java.io.InputStreamReader;
 3. выводит на экран максимальное из введенных N чисел.
 */
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int maximum = 0;
+public class Solution {
+    public static void main(String[] args) throws Exception {
         //напишите здесь ваш код
-        int N = Integer.parseInt(reader.readLine());
-
-        {
-             for (int i = 1; i <= N; i++)
-             {
-                    int a = Integer.parseInt(reader.readLine());
-                    if (maximum <= a || i == 1)
-                    {
-                        maximum = a;
-                    }
-             }
-        }
-
-        System.out.println(maximum);
     }
 }
 

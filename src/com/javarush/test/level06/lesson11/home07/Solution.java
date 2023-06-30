@@ -8,13 +8,12 @@ public class Solution
 {
     public static class Cat
     {
-        static String name;
+
     }
 
     public static class Dog
     {
-        static String name;
+
     }
 
-    static String name;
 }

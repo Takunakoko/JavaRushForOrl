@@ -8,30 +8,8 @@ package com.javarush.test.level05.lesson12.home05;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
-
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        int summ = 0;
-        while (true)
-        {
-            String a = r.readLine();
-            if (a.equals("сумма"))
-            {
-                System.out.println(summ);
-                return;
-            }
-            else
-            {
-                int s = Integer.parseInt(a);
-                summ = summ + s;
-            }
-        }
-
-
-
+public class Solution {
+    public static void main(String[] args) throws Exception {
         //Напишите тут ваш код
     }
 }

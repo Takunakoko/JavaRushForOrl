@@ -14,18 +14,8 @@ import java.io.InputStreamReader;
 абв
 */
 
-public class Solution
-{
-    public static void main(String[] args) throws Exception
-    {
-        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
-        String string = r.readLine();
-        int n = Integer.parseInt(r.readLine());
-        while (n>0){
-            System.out.println(string);
-            n--;
-        }
-        //Напишите тут ваш код
-
+public class Solution {
+    public static void main(String[] args) throws Exception {
+        // Напишите тут ваш код
     }
 }

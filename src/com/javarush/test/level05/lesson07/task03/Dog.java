@@ -7,18 +7,7 @@ package com.javarush.test.level05.lesson07.task03;
 - Имя, рост, цвет
 */
 
-public class Dog
-{
-    private String name = null;
-    public void initialize(String name){
-        this.name = name;
-    }
-    public void initialize(String name, int growth){
-        this.name = name + growth;
-    }
-    public void initialize(String name, int growth, String color){
-        this.name = name + growth + color;
-    }
+public class Dog {
     //Напишите тут ваш код
 
 }
