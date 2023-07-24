@@ -10,6 +10,16 @@ package com.javarush.test.level04.lesson10.task05;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-        // Напишите тут ваш код
+        int weight = 1;
+        int height = 1;
+        while (height<=10){
+            while (weight<=10){
+                System.out.printf(weight * height + " ");
+                weight++;
+            }
+            height++;
+            weight = 1;
+            System.out.println();
+        }
     }
 }

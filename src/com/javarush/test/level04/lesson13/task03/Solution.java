@@ -14,6 +14,14 @@ import java.io.InputStreamReader;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-        // Напишите тут ваш код
+       int eight = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j <= eight ; j++) {
+                System.out.print(8);
+            }
+            eight++;
+            System.out.println();
+
+        }
     }
 }

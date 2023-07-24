@@ -11,6 +11,16 @@ import java.io.InputStreamReader;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-        // Напишите тут ваш код
+
+        int s = 8;
+
+        for (int i = 0; i < 9; i++) {
+            System.out.printf("8");
+        }
+        for (int i = 0; i < 10; i++) {
+            System.out.println(s);
+        }
+
+
     }
 }

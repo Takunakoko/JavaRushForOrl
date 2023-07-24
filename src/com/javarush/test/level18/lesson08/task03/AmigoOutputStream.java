@@ -52,10 +52,11 @@ public class AmigoOutputStream extends FileOutputStream{
         return original.getChannel();
     }
 
-    @Override
-    protected void finalize() throws IOException {
-        super.finalize();
-    }
+//    @Override
+//    protected void finalize() throws IOException {
+//        super.finalize();
+//    }
+
 
     public static void main(String[] args) throws IOException
     {
