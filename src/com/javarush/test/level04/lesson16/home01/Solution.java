@@ -7,6 +7,11 @@ package com.javarush.test.level04.lesson16.home01;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-        // Напишите тут ваш код
+        String work = "Я никогда не буду работать за копейки. Амиго";
+
+        for (int i = 0; i <= 99 ; i++) {
+            System.out.println(work);
+
+        }
     }
 }
