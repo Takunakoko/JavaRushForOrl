@@ -6,9 +6,22 @@ package com.javarush.test.level05.lesson05.task01;
 */
 
 public class Cat {
+    public String name;
+    public int age;
+    public int weight;
+    public int strength;
+
+    public boolean fight(Cat anotherCat) {
+        if (this.strength > anotherCat.strength) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     //Напишите тут ваш код
     public void main(String[] args) {
+
 
     }
 

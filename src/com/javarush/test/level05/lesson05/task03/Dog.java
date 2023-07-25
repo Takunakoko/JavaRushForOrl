@@ -7,7 +7,23 @@ package com.javarush.test.level05.lesson05.task03;
 
 public class Dog {
 
-    //добавьте переменные класса тут
+    public String name;
+    public int age;
 
-    //добавьте геттеры и сеттеры тут
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge(){
+        return this.age;
+    }
+    public void setAge(int age){
+        this.age = age;
+    }
 }
+
+

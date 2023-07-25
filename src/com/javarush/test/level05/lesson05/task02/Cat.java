@@ -23,8 +23,11 @@ public class Cat {
     }
 
     public boolean fight(Cat anotherCat) {
-        //Напишите тут ваш код
-        return true;
+        if (this.strength > anotherCat.strength) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
