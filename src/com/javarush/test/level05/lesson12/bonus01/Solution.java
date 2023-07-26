@@ -13,6 +13,6 @@ public class Solution {
         int b = Integer.parseInt(reader.readLine());
 
         int sum = a + b;
-        System.out.println("Sum = " + sum + a + b);
+        System.out.println("Sum = " + sum);
     }
 }

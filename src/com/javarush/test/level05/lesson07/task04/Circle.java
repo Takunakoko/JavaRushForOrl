@@ -9,6 +9,35 @@ package com.javarush.test.level05.lesson07.task04;
 
 public class Circle {
 
-    //Напишите тут ваш код
+    public double centerX;
+    public double centerY;
+    public double radius;
+    public double width;
+    public String color;
+
+
+    public void initialize(double centerX, double centerY, double radius) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = radius;
+        this.width = radius * 2;
+        this.color = "white;";
+    }
+
+    public void initialize(double centerX, double centerY, double radius, double width) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = radius;
+        this.width = width;
+        this.color = "white;";
+    }
+
+    public void initialize(double centerX, double centerY, double radius, double width, String color) {
+        this.centerX = centerX;
+        this.centerY = centerY;
+        this.radius = radius;
+        this.width = width;
+        this.color = color;
+    }
 
 }
